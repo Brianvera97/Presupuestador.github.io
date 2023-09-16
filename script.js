@@ -9,15 +9,15 @@ PRESUPUESTAR.addEventListener('click', () => {
     const OTROS = parseInt(document.getElementById('otros').value);
     const DIFICULTAD = parseFloat(document.getElementById('dificultad').value);
 
-    validarForm(MATERIAL, COMBUS, VIATICO, OTROS)
+    validarForm(MATERIAL, COMBUS, VIATICO, OTROS, MANODEOBRA, DIFICULTAD)
 
     if (MATERIAL >= 0 && COMBUS >= 0 && MANODEOBRA >= 0 && VIATICO >= 0 && OTROS >= 0 && DIFICULTAD >= 0) {
 
-        let suma = (MATERIAL + MANODEOBRA + COMBUS + VIATICO + OTROS)
+        let suma = (MATERIAL + MANODEOBRA + COMBUS + OTROS)
         let dificultad = suma * DIFICULTAD
         let resultado = (dificultad + suma)
         let presupuesto = resultado * 0.6
-        let presupuestoFinal = resultado + presupuesto
+        let presupuestoFinal = resultado + presupuesto + VIATICO
         let presupuestoFormateado = presupuestoFinal.toLocaleString('es-ES', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
@@ -33,8 +33,8 @@ PRESUPUESTAR.addEventListener('click', () => {
     }
 
 })
-function validarForm(MATERIAL, COMBUS,VIATICO, MANODEOBRA, OTROS, DIFICULTAD, ) {
-    console.log(VIATICO);
+function validarForm(MATERIAL, COMBUS, VIATICO, MANODEOBRA, OTROS, DIFICULTAD,) {
+
     let esValido = true
 
     //Material
@@ -58,6 +58,47 @@ function validarForm(MATERIAL, COMBUS,VIATICO, MANODEOBRA, OTROS, DIFICULTAD, ) 
         document.getElementById('combusError').textContent = ''
         document.getElementById('combus').classList.remove('inputError')
     }
+    //Viatico
+    if (isNaN(VIATICO)) {
+        esValido = false
+        document.getElementById('viaticoError').textContent = '* completa este campo'
+        document.getElementById('viatico').classList.add('inputError')
+    }
+    else {
+        document.getElementById('viaticoError').textContent = ''
+        document.getElementById('viatico').classList.remove('inputError')
+    }
+    //Mano de obra
+    if (isNaN(MANODEOBRA)) {
+        esValido = false
+        document.getElementById('manoObraError').textContent = '* completa este campo'
+        document.getElementById('ManoDeObra').classList.add('inputError')
+    }
+    else {
+        document.getElementById('manoObraError').textContent = ''
+        document.getElementById('ManoDeObra').classList.remove('inputError')
+    }
+    //OTROS
+    if (isNaN(OTROS)) {
+        esValido = false
+        document.getElementById('otrosError').textContent = '* completa este campo'
+        document.getElementById('otros').classList.add('inputError')
+    }
+    else {
+        document.getElementById('otrosError').textContent = ''
+        document.getElementById('otros').classList.remove('inputError')
+    }
+    //Dificultad
+    if (isNaN(DIFICULTAD)) {
+        esValido = false
+        document.getElementById('dificultadError').textContent = '* completa este campo'
+        document.getElementById('dificultad').classList.add('inputError')
+    }
+    else {
+        document.getElementById('dificultadError').textContent = ''
+        document.getElementById('dificultad').classList.remove('inputError')
+    }
+
 
     if (!esValido) {
         event.preventDefault()
