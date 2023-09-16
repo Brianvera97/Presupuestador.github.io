@@ -133,3 +133,6 @@ h6{
 .inputError{
 border: solid 1px red;
 }
+.inputForm::before{
+background-color: #445bd3;
+}

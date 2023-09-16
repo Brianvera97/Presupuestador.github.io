@@ -9,33 +9,36 @@ PRESUPUESTAR.addEventListener('click', () => {
     const OTROS = parseInt(document.getElementById('otros').value);
     const DIFICULTAD = parseFloat(document.getElementById('dificultad').value);
 
-    validarForm(MATERIAL, COMBUS, VIATICO, OTROS, MANODEOBRA, DIFICULTAD)
+    let esValido = validarForm(MATERIAL, COMBUS, VIATICO, OTROS, MANODEOBRA, DIFICULTAD)
+console.log(esValido);
+    if (esValido === true) {
+        if (MATERIAL >= 0 && COMBUS >= 0 && MANODEOBRA >= 0 && VIATICO >= 0 && OTROS >= 0 && DIFICULTAD >= 0) {
 
-    if (MATERIAL >= 0 && COMBUS >= 0 && MANODEOBRA >= 0 && VIATICO >= 0 && OTROS >= 0 && DIFICULTAD >= 0) {
+            let suma = (MATERIAL + MANODEOBRA + COMBUS + OTROS)
+            let dificultad = suma * DIFICULTAD
+            let resultado = (dificultad + suma)
+            let presupuesto = resultado * 0.6
+            let presupuestoFinal = resultado + presupuesto + VIATICO
+            let presupuestoFormateado = presupuestoFinal.toLocaleString('es-ES', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            GS.innerHTML = `Presupuesto: ${presupuestoFormateado} Gs`
+            GS.style.display = 'block';
+            ERROR.style.display = 'none'
+        }
 
-        let suma = (MATERIAL + MANODEOBRA + COMBUS + OTROS)
-        let dificultad = suma * DIFICULTAD
-        let resultado = (dificultad + suma)
-        let presupuesto = resultado * 0.6
-        let presupuestoFinal = resultado + presupuesto + VIATICO
-        let presupuestoFormateado = presupuestoFinal.toLocaleString('es-ES', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
-        console.log(presupuestoFormateado);
-        GS.innerHTML = `Presupuesto: ${presupuestoFormateado} Gs`
-        GS.style.display = 'block';
-        ERROR.style.display = 'none'
     }
+
     else {
         ERROR.style.display = 'block'
         GS.style.display = 'none'
     }
 
 })
-function validarForm(MATERIAL, COMBUS, VIATICO, MANODEOBRA, OTROS, DIFICULTAD,) {
+function validarForm(MATERIAL, COMBUS, VIATICO, MANODEOBRA, OTROS, DIFICULTAD) {
 
-    let esValido = true
+    esValido = true
 
     //Material
     if (isNaN(MATERIAL)) {
@@ -73,35 +76,44 @@ function validarForm(MATERIAL, COMBUS, VIATICO, MANODEOBRA, OTROS, DIFICULTAD,) 
         esValido = false
         document.getElementById('manoObraError').textContent = '* completa este campo'
         document.getElementById('ManoDeObra').classList.add('inputError')
+
     }
     else {
         document.getElementById('manoObraError').textContent = ''
         document.getElementById('ManoDeObra').classList.remove('inputError')
     }
+
+
     //OTROS
     if (isNaN(OTROS)) {
         esValido = false
         document.getElementById('otrosError').textContent = '* completa este campo'
         document.getElementById('otros').classList.add('inputError')
+
     }
     else {
         document.getElementById('otrosError').textContent = ''
         document.getElementById('otros').classList.remove('inputError')
     }
+
     //Dificultad
     if (isNaN(DIFICULTAD)) {
         esValido = false
         document.getElementById('dificultadError').textContent = '* completa este campo'
+        document.getElementById('dificultad').classList.add('inputError')
+
+    }
+    else if (DIFICULTAD > 1) {
+        esValido = false
+        document.getElementById('dificultadError').textContent = '* Rango de valor entre 0 y 1'
         document.getElementById('dificultad').classList.add('inputError')
     }
     else {
         document.getElementById('dificultadError').textContent = ''
         document.getElementById('dificultad').classList.remove('inputError')
     }
+    return esValido
 
 
-    if (!esValido) {
-        event.preventDefault()
-    }
 
 }
