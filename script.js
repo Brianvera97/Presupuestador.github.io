@@ -1,6 +1,24 @@
 const PRESUPUESTAR = document.getElementById('presupuestar');
 const GS = document.getElementById('gs');
 const ERROR = document.getElementById('error');
+
+let hideTex = document.getElementById('hideTex');
+let hideText_btn = document.getElementById('hideText_btn');
+
+hideText_btn.addEventListener('click', ToggleTex);
+
+function ToggleTex() {
+    hideTex.classList.toggle('show');
+    if (hideTex.classList.contains('show')) {
+        hideText_btn.innerHTML = 'Menos Info';
+    }
+    else {
+        hideText_btn.innerHTML = 'Más Info';
+    }
+}
+
+
+
 PRESUPUESTAR.addEventListener('click', () => {
     const MATERIAL = parseInt(document.getElementById('material').value);
     const COMBUS = parseInt(document.getElementById('combus').value);
@@ -10,7 +28,8 @@ PRESUPUESTAR.addEventListener('click', () => {
     const DIFICULTAD = parseFloat(document.getElementById('dificultad').value);
 
     let esValido = validarForm(MATERIAL, COMBUS, VIATICO, OTROS, MANODEOBRA, DIFICULTAD)
-console.log(esValido);
+    console.log(OTROS);
+    console.log(MANODEOBRA);
     if (esValido === true) {
         if (MATERIAL >= 0 && COMBUS >= 0 && MANODEOBRA >= 0 && VIATICO >= 0 && OTROS >= 0 && DIFICULTAD >= 0) {
 

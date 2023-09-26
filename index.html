@@ -5,17 +5,28 @@
     <link rel="stylesheet" href="style.css">
     <script src="./script.js" defer> </script>
     <meta charset="utf-8" />
-    <title>Título de la web</title>
+    <title>Calculadora Express</title>
 </head>
 
 <body>
     <div id="contenedor">
         <div id="calculadora">
             <div class="contenido">
+
                 <div class="tittleForm">
                     <h2>Presupuestador Express</h2>
                 </div>
+                <div class="container">
+          
 
+                    <span class="hide" id="hideTex">
+                        <p>Como su nombre lo indica esta herramienta sirve para optimizar el tiempo de la elaboración de un presupuesto siendo su uso un tanto intuitivo. Ya que es un prototipo de lo que será el resultado final se estará utilizando por defecto la rentabilidad del 60% por sobre el valor que el usuario cargase, exceptuando el viático (este se sumará al presupuesto, pero no se aplicará la rentabilidad antes mencionada). Otro dato a tener en cuenta es la casilla de "Dificultad" que está elaborada para tomar datos en porcentaje, por ejemplo: 0.1 = 10% ; 0.15 = 15% ; 0.2 = 20% y así sucesivamente.     
+                        </p>
+                    </span>
+        
+                    <button class="masInfobtn" id="hideText_btn">Más info</button>
+        
+                </div>
 
                 <div class="inputContainer">
                     <input class="inputForm" id="material" type="number" placeholder="Costo Material">
